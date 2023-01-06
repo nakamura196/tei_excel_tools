@@ -8,7 +8,6 @@ import pandas as pd
 from pprint import pprint
 from koui.api import KouiAPIClient
 from bs4 import BeautifulSoup
-import xml.dom.minidom
 import xml.etree.ElementTree as ET
 
 # %% ../nbs/00_core.ipynb 4
