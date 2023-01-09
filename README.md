@@ -15,9 +15,11 @@ pip install tei_excel_tools
 
 フォーマットは以下でご確認ください。
 
-<https://zenn.dev/articles/4a4b3c50745c87>
+<https://zenn.dev/nakamura196/articles/4a4b3c50745c87>
 
 ``` python
+from tei_excel_tools.core import Client
+
 input_path = "data/sample.xlsx"
 output_path = "data/output.xml"
 
