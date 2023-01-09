@@ -29,9 +29,4 @@ d = { 'settings': { 'branch': 'main',
                                                                                          'tei_excel_tools/core.py'),
                                       'tei_excel_tools.core.Client.replace_kigo_around_x': ( 'core.html#client.replace_kigo_around_x',
                                                                                              'tei_excel_tools/core.py'),
-                                      'tei_excel_tools.core.Client.save': ('core.html#client.save', 'tei_excel_tools/core.py')},
-            'tei_excel_tools.uparl': { 'tei_excel_tools.uparl.Uparl': ('uparl.html#uparl', 'tei_excel_tools/uparl.py'),
-                                       'tei_excel_tools.uparl.Uparl.__init__': ('uparl.html#uparl.__init__', 'tei_excel_tools/uparl.py'),
-                                       'tei_excel_tools.uparl.Uparl.convert': ('uparl.html#uparl.convert', 'tei_excel_tools/uparl.py'),
-                                       'tei_excel_tools.uparl.Uparl.covertExcel': ( 'uparl.html#uparl.covertexcel',
-                                                                                    'tei_excel_tools/uparl.py')}}}
+                                      'tei_excel_tools.core.Client.save': ('core.html#client.save', 'tei_excel_tools/core.py')}}}

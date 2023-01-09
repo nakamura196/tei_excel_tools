@@ -117,6 +117,12 @@ class Client:
             subtype = row['subtype']
             image = row['image']
             text = row['text']
+
+            if pd.isnull(text):
+                continue
+
+            text = text.replace("/", "<lb/>")
+
             page_id = row["page_id"]
 
             if line_id not in notes:
@@ -158,6 +164,10 @@ class Client:
             text1 = row['text1']
             text2 = row["text2"]
 
+            if line_id != "l01-0039-b-7":
+                # continue
+                pass
+
             # 新しいページ
             if page_id not in page_ids:
                 page_ids.append(page_id)
@@ -178,14 +188,16 @@ class Client:
             if line_id in notes:
                 notes_ = notes[line_id]
 
-            # 眉のノートを追加
-            abs = Client.add_notes(abs, notes_, "眉")
-
             ####################
 
             # lbの追加
             lb = f'<lb xml:id="{line_id}"/>'
             abs.append(lb)
+
+            ####################
+
+            # 眉のノートを追加
+            abs = Client.add_notes(abs, notes_, "眉")
 
             ####################
 
@@ -267,39 +279,53 @@ class Client:
 
             lem_text = lem_text.replace("(", "").replace(")", "").replace("<", "").replace(">", "")
             rdg_text = rdg_text.replace("(", "").replace(")", "").replace("<", "").replace(">", "")
-
-            '''
-            if "*" in lem.text: 
+            
+            if "*" in lem.text and lem.text.replace("*", "") == "": 
                 c = lem.text.count("*")
                 app.insert_after("*" * c)
                 app.decompose()
             elif lem.text != rdg.text:
-            '''
-            if lem_text != rdg_text:
+                ''' if lem_text != rdg_text:'''
                 choice = soup.new_tag("choice")
-                app.insert_after(choice)
+                
 
                 orig = soup.new_tag("orig")
 
                 if lem_type:
-                    orig["type"] = lem_type
+                    # orig["type"] = lem_type
+                    pass
 
                 if lem_certain:
-                    orig["certainty"] = lem_certain
+                    orig["cert"] = lem_certain
 
                 choice.append(orig)
+
+                if lem_type:
+                    # lem_text += " [" + lem_type + "]"
+                    pass
+
                 orig.append(lem_text)
 
                 reg = soup.new_tag("reg")
 
                 if rdg_type:
                     reg["type"] = rdg_type
+                    # pass
 
                 if rdg_certain:
-                    reg["certainty"] = rdg_certain
+                    reg["cert"] = rdg_certain
 
-                choice.append(reg)
+                
+
+                if rdg_type:
+                    # rdg_text += " [" + rdg_type + "]"
+                    pass
+                        
                 reg.append(rdg_text)
+                choice.append(reg)
+
+                if lem_text != "" or rdg_text != "":
+                    app.insert_after(choice)
             app.decompose()
 
         line = str(line).replace("<p>", "").replace("</p>", "")
@@ -412,7 +438,12 @@ class Client:
 
             if note["pos"] is not None:
                 subtype_string = f' subtype="{note["subtype"]}"' if not pd.isnull(note["subtype"]) else ""
-                note_string = f'<note corresp="#{note["note_id"]}" type="{note["type"]}"{subtype_string}>{note["text"]}</note>'            
+                
+                if pd.isnull(note["text"]):
+                    note_string = ""
+                else:
+                    note_string = f'<note corresp="#{note["note_id"]}" type="{note["type"]}"{subtype_string}>{note["text"]}</note>'            
+                
                 text = Client.replace_from_last(text, "*", note_string)
 
         return text
