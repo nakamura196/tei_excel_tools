@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "tei_excel_tools",
+    "section": "",
+    "text": "pip install tei_excel_tools"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "tei_excel_tools",
+    "section": "How to use",
+    "text": "How to use\n所定のフォーマットを持つExcelファイルを格納した入力パス、およびTEI/XMLファイルの出力パスを指定してください。\nフォーマットは以下でご確認ください。\nhttps://zenn.dev/nakamura196/articles/4a4b3c50745c87\n\nfrom tei_excel_tools.core import Client\n\ninput_path = \"data/sample.xlsx\"\noutput_path = \"data/output.xml\"\n\nxml_string = Client.convertExcel(input_path)\nClient.save(xml_string, output_path)"
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nClient\n\n Client (path)\n\nInitialize self. See help(type(self)) for accurate signature."
+  }
+]
